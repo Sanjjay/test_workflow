@@ -86,6 +86,9 @@ jobs:
           echo "VERSION_CODE=$VERSION_CODE" >> $GITHUB_ENV
           echo "Final Version Selected: $NEW_TAG (Code: $VERSION_CODE)"
 
+      - name: Create Release Output Directory
+        run: mkdir -p app/build/outputs/apk/release
+        
       - name: Sign Android APK Config
         id: sign_apk
         uses: r0adkll/sign-android-release@v1
@@ -109,7 +112,7 @@ jobs:
 
       - name: Rename Signed APK
         run: |
-          mv ${{ steps.sign_apk.outputs.signedReleaseFile }} app/build/outputs/apk/release/TVScreenManager-${{ env.NEW_TAG }}.apk
+          mv app/build/outputs/apk/release/app-release-signed.apk app/build/outputs/apk/release/TVScreenManager-${{ env.NEW_TAG }}.apk
 
       - name: Calculate SHA-256 Checksum
         id: calc_sha
