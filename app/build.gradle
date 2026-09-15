@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    namespace 'com.tvscreenmanager' 
+    namespace 'com.tvscreenmanager'
     compileSdk 36
 
     defaultConfig {
         applicationId "com.tvscreenmanager"
-        minSdk 21        
+        minSdk 21
         targetSdk 36 
         
         versionCode project.hasProperty('versionCode') ? project.property('versionCode').toInteger() : 1
@@ -28,7 +28,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            
+            if (System.getenv("KEYSTORE_FILE") != null) {
+                signingConfig signingConfigs.release
+            }
         }
     }
 }
