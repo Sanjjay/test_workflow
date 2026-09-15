@@ -109,12 +109,12 @@ jobs:
 
       - name: Rename Signed APK
         run: |
-          mv ${{ steps.sign_apk.outputs.signedReleaseFile }} app/build/outputs/apk/release/TVScreenManager-${{ env.NEW_TAG }}.apk
+          mv ${{ steps.sign_apk.outputs.signedReleaseFile }} app/build/outputs/apk/release/Add Name of app-${{ env.NEW_TAG }}.apk
 
       - name: Calculate SHA-256 Checksum
         id: calc_sha
         run: |
-          APK_PATH="app/build/outputs/apk/release/TVScreenManager-${{ env.NEW_TAG }}.apk"
+          APK_PATH="app/build/outputs/apk/release/Add Name of app-${{ env.NEW_TAG }}.apk"
           SHA_VALUE=$(sha256sum "$APK_PATH" | awk '{print $1}')
           echo "sha=$SHA_VALUE" >> $GITHUB_OUTPUT
 
@@ -132,7 +132,7 @@ jobs:
             NOTES_BODY="$USER_NOTES"
           fi
           
-          SHA_FOOTER="\n\n---\n### 🔒 Build Verification\n* **TVScreenManager-${{ env.NEW_TAG }}.apk \n SHA-256:** \`${{ steps.calc_sha.outputs.sha }}\`"
+          SHA_FOOTER="\n\n---\n### 🔒 Build Verification\n* **Add Name of app-${{ env.NEW_TAG }}.apk \n SHA-256:** \`${{ steps.calc_sha.outputs.sha }}\`"
           
           echo "notes<<EOF" >> $GITHUB_OUTPUT
           echo -e "$NOTES_BODY$SHA_FOOTER" >> $GITHUB_OUTPUT
@@ -148,7 +148,7 @@ jobs:
       - name: Attest Artifact
         uses: actions/attest-build-provenance@v1
         with:
-          subject-path: "app/build/outputs/apk/release/TVScreenManager-${{ env.NEW_TAG }}.apk"
+          subject-path: "app/build/outputs/apk/release/Add Name of app-${{ env.NEW_TAG }}.apk"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -159,4 +159,4 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            app/build/outputs/apk/release/TVScreenManager-${{ env.NEW_TAG }}.apk
+            app/build/outputs/apk/release/Add Name of app-${{ env.NEW_TAG }}.apk
