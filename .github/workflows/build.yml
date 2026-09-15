@@ -48,7 +48,7 @@ jobs:
           gradle wrapper --gradle-version 8.5
           chmod +x gradlew
 
-      - name: Install Android 17 SDK Component
+      - name: Install Android 16 SDK Component
         run: |
           echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install
 
@@ -90,8 +90,7 @@ jobs:
         run: |
           ./gradlew assembleRelease \
             -PversionCode=${{ env.VERSION_CODE }} \
-            -PversionName="${{ env.PURE_VERSION }}" \
-            -Pandroid.suppressUnsupportedCompileSdk=37
+            -PversionName="${{ env.PURE_VERSION }}"
         env:
           KEYSTORE_FILE: "noop.keystore"
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
