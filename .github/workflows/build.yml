@@ -124,7 +124,7 @@ jobs:
           USER_NOTES="${{ github.event.inputs.release_notes }}"
           if [ -z "$USER_NOTES" ]; then
             if [ "${{ github.event.inputs.version_bump }}" == "new" ]; then
-              NOTES_BODY="### Changes in ${{ env.NEW_TAG }}\n- 🎉 Initial Release!\n- Ready for production installation."
+              NOTES_BODY="### Changes in ${{ env.NEW_TAG }}\n- 🎉 Initial Release!"
             else
               NOTES_BODY="### Changes in ${{ env.NEW_TAG }}\n- Automated release build.\n- Bug fixes and stability improvements."
             fi
@@ -132,7 +132,7 @@ jobs:
             NOTES_BODY="$USER_NOTES"
           fi
           
-          SHA_FOOTER="\n\n---\n### 🔒 Build Verification\n* **TVScreenManager-${{ env.NEW_TAG }}.apk SHA-256:**\n  \`${{ steps.calc_sha.outputs.sha }}\`"
+          SHA_FOOTER="\n\n---\n### 🔒 Build Verification\n* **TVScreenManager-${{ env.NEW_TAG }}.apk \n SHA-256:** \`${{ steps.calc_sha.outputs.sha }}\`"
           
           echo "notes<<EOF" >> $GITHUB_OUTPUT
           echo -e "$NOTES_BODY$SHA_FOOTER" >> $GITHUB_OUTPUT
@@ -154,7 +154,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.NEW_TAG }}
-          name: Release ${{ env.NEW_TAG }}
+          name: ${{ env.NEW_TAG }}
           body: ${{ steps.release_notes.outputs.notes }}
           draft: false
           prerelease: false
