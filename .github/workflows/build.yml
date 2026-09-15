@@ -52,6 +52,11 @@ jobs:
         run: |
           echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install
 
+      - name: Link Android Build Tools to Expected Path
+        run: |
+          sudo mkdir -p /usr/local/lib/android/sdk/build-tools
+          sudo ln -s $ANDROID_HOME/build-tools/34.0.0 /usr/local/lib/android/sdk/build-tools/29.0.3
+
       - name: Generate Version Tag & Code
         id: versioning
         run: |
@@ -101,7 +106,6 @@ jobs:
           alias: ${{ secrets.KEY_ALIAS }}
           keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: "34.0.0"
 
       - name: Rename Signed APK
         run: |
