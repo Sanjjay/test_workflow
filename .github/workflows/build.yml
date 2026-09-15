@@ -90,7 +90,8 @@ jobs:
         run: |
           ./gradlew assembleRelease \
             -PversionCode=${{ env.VERSION_CODE }} \
-            -PversionName="${{ env.PURE_VERSION }}"
+            -PversionName="${{ env.PURE_VERSION }}" \
+            -Pandroid.suppressUnsupportedCompileSdk=37
         env:
           KEYSTORE_FILE: "noop.keystore"
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
