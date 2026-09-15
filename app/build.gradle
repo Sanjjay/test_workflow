@@ -3,7 +3,8 @@ plugins {
 }
 
 android {
-    namespace 'com.tvscreenmanager'   
+    namespace 'com.tvscreenmanager' 
+    suppressUnsupportedCompileSdk = 37
     compileSdk 37
 
     defaultConfig {
